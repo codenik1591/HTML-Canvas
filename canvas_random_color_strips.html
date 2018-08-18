@@ -1,0 +1,56 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Colored Strips</title>
+    <script>
+
+
+        var timer;
+
+
+        window.addEventListener("devicemotion", setTime,true);
+
+        function setTime(){
+            //alert("called");
+            handleMotionEvent(event);
+
+            //setTimeout(handleMotionEvent(event), 3000);
+        }
+
+        function handleMotionEvent(event) {
+            var x = Math.abs(event.accelerationIncludingGravity.x);
+            var y = Math.abs(event.accelerationIncludingGravity.y);
+            var z = Math.abs(event.accelerationIncludingGravity.z);
+            console.log("handleMotionEvent",x,y,z);
+            var canvas = document.getElementById("paper"),
+                c = canvas.getContext("2d");
+            canvas.width=window.innerWidth;
+            canvas.height=window.innerHeight;
+            for(var i=0;i<canvas.height;i+=24) {
+                var motionInt = x+y+z;
+                c.beginPath();
+                c.lineWidth=25;
+                c.moveTo(0,i);
+                c.strokeStyle = "#"+((1<<24)*Math.random()|0).toString(16);
+                c.lineTo(canvas.width, i);
+                c.stroke();
+            }
+            requestAnimationFrame(handleMotionEvent);
+
+        }
+        requestAnimationFrame(handleMotionEvent);
+    </script>
+    <style>
+        body{
+            margin: 0;
+        }
+    </style>
+</head>
+<body >
+<canvas id="paper" width="100%" height="100%">
+    Canvas
+</canvas>
+</body>
+</html>
