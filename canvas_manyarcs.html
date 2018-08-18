@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Canvas Many Arcs</title>
+
+	<style>
+        body {
+            margin: 0;
+        }
+        @media (min-width: 700px) {
+            body{
+                text-align: center;
+            }
+            /*#myCanvas{
+                height: 580px;
+            }*/
+        }
+        @media only screen and (max-width: 480px){
+            #myCanvas{
+                width: 100%;
+            }
+        }
+    </style>
+
+    <script type="text/javascript">
+    	function makeEye(){
+
+            //Getting the element by id
+    		var cc = document.getElementById("myCanvas");
+            var c = cc.getContext("2d");
+
+
+             c.beginPath();
+            var width = 865;
+            var height = 580;
+
+            c.fillRect(0,0, width,height);
+            c.fillStyle="white";
+            c.closePath();
+
+            /*c.beginPath();
+            c.moveTo(width/2,0);
+            c.lineTo(width/2,height);
+
+            c.lineWidth = '4';
+            c.strokeStyle = "white";
+            c.stroke();
+            c.closePath();
+
+            c.beginPath();
+            c.moveTo(0,height/2);
+            c.lineTo(width, height/2);
+
+            c.lineWidth = '4';
+            c.strokeStyle = "white";
+            c.stroke();
+            c.closePath();*/
+
+            var radius = 400;
+            var x = width/2;
+            var y = height/2;
+
+            //right side
+
+            x =width-30;
+            y = height/2;
+
+            for (var i = 51; i>0; i--) {
+                if(i%2==0){
+                    c.beginPath();
+                    c.arc(x,y,radius,0,2*Math.PI);
+                    c.lineWidth = '2';
+                    c.strokeStyle = "white";
+                    c.fillStyle = "white";
+
+                    c.fill();
+                    c.stroke();
+                    c.closePath();
+
+                    radius-=8;
+                    x-=8;
+
+                }else{
+                    c.beginPath();
+                    c.arc(x,y,radius,0,2*Math.PI);
+                    c.lineWidth = '2';
+                    c.strokeStyle = "black";
+                    c.fillStyle = "black";
+
+                    c.stroke();
+                    c.fill();
+                    c.closePath();
+
+                    radius-=8;
+                    x-=8;
+
+                }
+            }
+            
+
+            //left side
+
+            radius = 400;
+            /*x = width/2;
+            y = height/2;*/
+
+            x =30;
+            y = height/2;
+
+            for (var i = 51; i>0; i--) {
+                if(i%2==0){
+                    c.beginPath();
+                    c.arc(x,y,radius,0,2*Math.PI);
+                    c.lineWidth = '2';
+                    c.strokeStyle = "white";
+                    c.fillStyle = "white";
+
+                    c.fill();
+                    c.stroke();
+                    c.closePath();
+
+                    radius-=8;
+                    x+=8;
+
+                }else{
+                    c.beginPath();
+                    c.arc(x,y,radius,0,2*Math.PI);
+                    c.lineWidth = '2';
+                    c.strokeStyle = "black";
+                    c.fillStyle = "black";
+
+                    c.stroke();
+                    c.fill();
+                    c.closePath();
+
+                    radius-=8;
+                    x+=8;
+
+                }
+            } 
+    	}
+</script>
+</head>
+<body onload="makeEye()">
+<canvas id="myCanvas" width="865" height="580"></canvas>
+</body>
+</html>
